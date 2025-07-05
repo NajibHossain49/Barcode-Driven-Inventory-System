@@ -77,47 +77,148 @@ const BarcodeScanner: React.FC<BarcodeScannerProps> = ({ reload, isReload }) => 
   };
 
   return (
-    <div className="p-4 max-w-md mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Barcode Scanner</h2>
-      <div className="mb-4">
-        <input
-          type="file"
-          accept="image/png,image/jpeg,image/jpg,image/gif"
-          onChange={handleFileChange}
-          className="block w-full text-sm text-gray-500
-            file:mr-4 file:py-2 file:px-4
-            file:rounded-full file:border-0
-            file:text-sm file:font-semibold
-            file:bg-blue-50 file:text-blue-700
-            hover:file:bg-blue-100"
-        />
+    <div className="bg-white rounded-xl shadow-lg p-6 max-w-md mx-auto border border-gray-200">
+      {/* Header */}
+      <div className="flex items-center mb-6">
+        <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg p-3 mr-4">
+          <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v1m6 11a2 2 0 01-2 2H8a2 2 0 01-2-2V9a2 2 0 012-2h8a2 2 0 012 2v6zM8 9l4 4 4-4" />
+          </svg>
+        </div>
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900">Barcode Scanner</h2>
+          <p className="text-gray-600 text-sm">Upload an image to scan barcodes</p>
+        </div>
       </div>
+
+      {/* File Upload Section */}
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Select Image File
+        </label>
+        <div className="relative">
+          <input
+            type="file"
+            accept="image/png,image/jpeg,image/jpg,image/gif"
+            onChange={handleFileChange}
+            className="block w-full text-sm text-gray-500
+              file:mr-4 file:py-3 file:px-4
+              file:rounded-lg file:border-0
+              file:text-sm file:font-semibold
+              file:bg-gradient-to-r file:from-blue-50 file:to-blue-100
+              file:text-blue-700 hover:file:from-blue-100 hover:file:to-blue-200
+              file:cursor-pointer file:transition-all file:duration-200
+              border border-gray-300 rounded-lg px-3 py-2
+              focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+        {file && (
+          <div className="mt-2 flex items-center text-sm text-green-600">
+            <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            </svg>
+            File selected: {file.name}
+          </div>
+        )}
+      </div>
+
+      {/* Scan Button */}
       <button
         onClick={handleFileUpload}
         disabled={!file || loading}
-        className={`w-full py-2 px-4 rounded text-white font-semibold
-          ${!file || loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'}`}
+        className={`w-full py-3 px-4 rounded-lg font-semibold text-white transition-all duration-200 flex items-center justify-center space-x-2
+          ${!file || loading 
+            ? 'bg-gray-400 cursor-not-allowed' 
+            : 'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 shadow-md hover:shadow-lg transform hover:-translate-y-0.5'
+          }`}
       >
-        {loading ? 'Processing...' : 'Scan Barcode'}
+        {loading ? (
+          <>
+            <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span>Processing...</span>
+          </>
+        ) : (
+          <>
+            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <span>Scan Barcode</span>
+          </>
+        )}
       </button>
 
+      {/* Error Display */}
       {error && (
-        <div className="mt-4 p-3 bg-red-100 text-red-700 rounded">
-          {error}
+        <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+          <div className="flex items-start">
+            <svg className="h-5 w-5 text-red-400 mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+            </svg>
+            <div>
+              <h3 className="text-sm font-medium text-red-800">Error</h3>
+              <p className="text-sm text-red-700 mt-1">{error}</p>
+            </div>
+          </div>
         </div>
       )}
 
+      {/* Product Display */}
       {product && (
-        <div className="mt-4 p-4 bg-gray-100 rounded">
-          <h3 className="text-lg font-semibold">Product Details</h3>
-          <p><strong>Barcode:</strong> {product.barcode}</p>
-          <p><strong>Name:</strong> {product.name}</p>
-          <p><strong>Description:</strong> {product.description}</p>
-          {/* Uncomment if price and category are needed */}
-          {/* <p><strong>Price:</strong> ${product.price.toFixed(2)}</p> */}
-          {/* <p><strong>Category:</strong> {product.category}</p> */}
+        <div className="mt-6 p-4 bg-gradient-to-r from-green-50 to-green-100 border border-green-200 rounded-lg">
+          <div className="flex items-center mb-3">
+            <svg className="h-6 w-6 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <h3 className="text-lg font-semibold text-green-800">Product Found!</h3>
+          </div>
+          <div className="space-y-2">
+            <div className="flex items-center">
+              <span className="text-sm font-medium text-green-700 w-24">Barcode:</span>
+              <span className="text-sm text-green-800 bg-green-200 px-2 py-1 rounded font-mono">
+                {product.barcode}
+              </span>
+            </div>
+            {/* <div className="flex items-start">
+              <span className="text-sm font-medium text-green-700 w-24 mt-1">Name:</span>
+              <span className="text-sm text-green-800 font-medium">
+                {product.name}
+              </span>
+            </div> */}
+            <div className="flex items-start">
+              <span className="text-sm font-medium text-green-700 w-24 mt-1">Product:</span>
+              <span className="text-sm text-green-800">
+                {product.description}
+              </span>
+            </div>
+            {/* Uncomment if price and category are needed */}
+            {/* <div className="flex items-center">
+              <span className="text-sm font-medium text-green-700 w-24">Price:</span>
+              <span className="text-sm text-green-800 font-semibold">
+                ${product.price.toFixed(2)}
+              </span>
+            </div>
+            <div className="flex items-center">
+              <span className="text-sm font-medium text-green-700 w-24">Category:</span>
+              <span className="text-sm text-green-800 bg-green-200 px-2 py-1 rounded">
+                {product.category}
+              </span>
+            </div> */}
+          </div>
         </div>
       )}
+
+      {/* Help Text */}
+      <div className="mt-4 p-3 bg-gray-50 rounded-lg">
+        <h4 className="text-sm font-medium text-gray-700 mb-1">Tips for better results:</h4>
+        <ul className="text-xs text-gray-600 space-y-1">
+          <li>• Ensure the barcode is clearly visible and well-lit</li>
+          <li>• Use high-resolution images for better accuracy</li>
+          <li>• Supported formats: PNG, JPEG, JPG, GIF</li>
+        </ul>
+      </div>
     </div>
   );
 };
