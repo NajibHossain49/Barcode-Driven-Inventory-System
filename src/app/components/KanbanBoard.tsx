@@ -1,49 +1,52 @@
 // This component represents the Kanban board for managing products.
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd';
-import axios from 'axios';
-import BarcodeScanner from './BarcodeScanner';
-import ProductCard from './ProductCard';
-import { Product, Category } from '@/app/lib/types';
+import { Category, Product } from "@/app/lib/types";
+import { DragDropContext, Droppable, DropResult } from "@hello-pangea/dnd";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import BarcodeScanner from "./BarcodeScanner";
+import ProductCard from "./ProductCard";
 
 export default function KanbanBoard() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<Category[]>([{ name: 'Uncategorized' }]);
-  const [newCategory, setNewCategory] = useState('');
+  const [categories, setCategories] = useState<Category[]>([
+    { name: "Uncategorized" },
+  ]);
+  const [newCategory, setNewCategory] = useState("");
+  const [reload, setReload] = useState(null);
 
   useEffect(() => {
     fetchProducts();
     fetchCategories();
-  }, []);
+  }, [reload]);
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('/api/products');
+      const response = await axios.get("/api/products");
       setProducts(response.data);
     } catch (error) {
-      console.error('Failed to fetch products:', error);
+      console.error("Failed to fetch products:", error);
     }
   };
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get('/api/categories');
-      setCategories([{ name: 'Uncategorized' }, ...response.data]);
+      const response = await axios.get("/api/categories");
+      setCategories([{ name: "Uncategorized" }, ...response.data]);
     } catch (error) {
-      console.error('Failed to fetch categories:', error);
+      console.error("Failed to fetch categories:", error);
     }
   };
 
   const handleAddCategory = async () => {
     if (newCategory) {
       try {
-        await axios.post('/api/categories', { name: newCategory });
+        await axios.post("/api/categories", { name: newCategory });
         setCategories([...categories, { name: newCategory }]);
-        setNewCategory('');
+        setNewCategory("");
       } catch (error) {
-        console.error('Failed to add category:', error);
+        console.error("Failed to add category:", error);
       }
     }
   };
@@ -61,7 +64,7 @@ export default function KanbanBoard() {
           });
           fetchProducts();
         } catch (error) {
-          console.error('Failed to update product category:', error);
+          console.error("Failed to update product category:", error);
         }
       }
     }
@@ -73,7 +76,11 @@ export default function KanbanBoard() {
 
   return (
     <div>
-      <BarcodeScanner onScan={handleScan} />
+      <BarcodeScanner
+        onScan={handleScan}
+        reload={setReload}
+        isReload={reload}
+      />
       <div className="mb-4">
         <input
           type="text"
@@ -82,7 +89,10 @@ export default function KanbanBoard() {
           placeholder="New category name"
           className="border p-2 mr-2"
         />
-        <button onClick={handleAddCategory} className="bg-blue-500 text-white p-2 rounded">
+        <button
+          onClick={handleAddCategory}
+          className="bg-blue-500 text-white p-2 rounded"
+        >
           Add Category
         </button>
       </div>
@@ -100,7 +110,11 @@ export default function KanbanBoard() {
                   {products
                     .filter((product) => product.category === category.name)
                     .map((product, index) => (
-                      <ProductCard key={product.barcode} product={product} index={index} />
+                      <ProductCard
+                        key={product.barcode}
+                        product={product}
+                        index={index}
+                      />
                     ))}
                   {provided.placeholder}
                 </div>
