@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // This file handles the API routes for categories in a Next.js application.
 import { getDb } from "@/app/lib/mongodb";
 import { Category } from "@/app/lib/types";

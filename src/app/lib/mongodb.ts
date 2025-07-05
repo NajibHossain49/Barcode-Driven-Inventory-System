@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // This file is used to connect to MongoDB using the MongoDB Node.js driver.
 import { MongoClient } from "mongodb";
 

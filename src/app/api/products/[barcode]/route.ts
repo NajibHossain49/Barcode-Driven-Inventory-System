@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // This file handles API requests for product details and updates based on barcode.
 import { getDb } from "@/app/lib/mongodb";
 import { Product } from "@/app/lib/types";

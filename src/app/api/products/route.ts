@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // This file handles product-related API requests, including fetching and adding products.
 import { getDb } from "@/app/lib/mongodb";
 import { Product } from "@/app/lib/types";

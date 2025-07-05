@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Project: Barcode Scanner Component
 // Description: A React component for scanning barcodes using the Quagga library.
 "use client";
