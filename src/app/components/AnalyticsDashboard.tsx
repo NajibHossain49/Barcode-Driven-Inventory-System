@@ -28,6 +28,7 @@ export default function AnalyticsDashboard() {
     recentProducts: [],
   });
   const [error, setError] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchAnalytics = async () => {
@@ -47,6 +48,11 @@ export default function AnalyticsDashboard() {
 
     fetchAnalytics();
   }, []);
+
+  // Filter products based on search term by category
+  const filteredProducts = analytics.recentProducts.filter((product) =>
+    product.category.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="mt-8 p-4 bg-gray-100 rounded-lg shadow-md">
@@ -73,11 +79,25 @@ export default function AnalyticsDashboard() {
       {/* Recently Added Products */}
       <div>
         <h3 className="text-xl font-semibold mb-2">Recently Added Products</h3>
-        {analytics.recentProducts.length === 0 ? (
-          <p>No products found</p>
+        
+        {/* Search bar */}
+        <div className="mb-4">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search products by category..."
+            className="border p-2 w-64 rounded"
+          />
+        </div>
+
+        {filteredProducts.length === 0 ? (
+          <p>
+            {searchTerm ? "No products match your category search" : "No products found"}
+          </p>
         ) : (
           <ul className="space-y-2">
-            {analytics.recentProducts.map((product) => (
+            {filteredProducts.map((product) => (
               <li key={product._id} className="p-2 bg-white rounded shadow">
                 <p>
                   <strong>Name:</strong> {product.name}

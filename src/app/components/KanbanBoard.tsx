@@ -15,6 +15,7 @@ export default function KanbanBoard() {
   ]);
   const [newCategory, setNewCategory] = useState("");
   const [reload, setReload] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     fetchProducts();
@@ -74,6 +75,11 @@ export default function KanbanBoard() {
     setProducts([...products, product]);
   };
 
+  // Filter products based on search term
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div>
       <BarcodeScanner
@@ -81,6 +87,18 @@ export default function KanbanBoard() {
         reload={setReload}
         isReload={reload}
       />
+      
+      {/* Search bar */}
+      <div className="mb-4">
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search products by name..."
+          className="border p-2 mr-2 w-64"
+        />
+      </div>
+
       <div className="mb-4">
         <input
           type="text"
@@ -96,6 +114,7 @@ export default function KanbanBoard() {
           Add Category
         </button>
       </div>
+      
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="flex space-x-4 overflow-x-auto">
           {categories.map((category) => (
@@ -107,7 +126,7 @@ export default function KanbanBoard() {
                   className="bg-gray-100 p-4 w-64 rounded"
                 >
                   <h2 className="font-bold mb-2">{category.name}</h2>
-                  {products
+                  {filteredProducts
                     .filter((product) => product.category === category.name)
                     .map((product, index) => (
                       <ProductCard
