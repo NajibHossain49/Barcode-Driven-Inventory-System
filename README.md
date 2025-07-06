@@ -4,16 +4,19 @@ A web-based inventory management system built with **Next.js 15**, featuring **b
 
 ## Table of Contents
 - [Overview](#overview)
+- [Live Link](#live-demo)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
 - [Setup Instructions](#setup-instructions)
 - [Running the Application](#running-the-application)
-- [Live Demo](#live-demo)
 - [Documentation](#documentation)
-
+- [Challenges-Faced] (#Challenges-Faced)
 ## Overview
 This project is a barcode-driven inventory system designed to manage products efficiently. It allows users to **scan barcodes to fetch product details**, organize products into categories using a **drag-and-drop Kanban board**, and persist data in a **MongoDB database**. The system is responsive, secure, and includes optional features like authentication and analytics.
+
+## Live Link
+The application is hosted at: [[https://barcode-driven-inventory-system.vercel.app](https://barcode-driven-inventory-system.vercel.app)].  
 
 ## Features
 ### Core Features
@@ -127,10 +130,6 @@ barcode-inventory/
    npm run lint
    ```
    - Ensures code quality and adherence to standards.
-
-## Live Demo
-The application is hosted at: [Insert Live Link Here].  
-
 
 ## Documentation
 - **Tools/Libraries Chosen**:
