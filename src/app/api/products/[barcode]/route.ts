@@ -50,7 +50,7 @@ export async function GET(
       error.stack
     );
     return NextResponse.json(
-      { error: "Failed to fetch product", details: error.message },
+      { error: "Product data is currently unavailable. Please refresh or try again later.", details: error.message },
       { status: 500 }
     );
   }

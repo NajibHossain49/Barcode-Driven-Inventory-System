@@ -73,7 +73,7 @@ const BarcodeScanner: React.FC<BarcodeScannerProps> = ({
       const response = await fetch(`/api/products/${barcode}`);
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to fetch product");
+        throw new Error(errorData.error || "Product data is currently unavailable. Please refresh or try again later.");
       }
 
       const productData: ApiResponse = await response.json();
