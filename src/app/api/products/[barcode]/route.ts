@@ -29,9 +29,20 @@ export async function GET(
         category: "Uncategorized",
       };
       await db.collection<Product>("products").insertOne(product);
-    }
 
-    return NextResponse.json(productData);
+      return NextResponse.json({
+        ...productData,
+        isExisting: false,
+        message: "A new item has been added to stock",
+      });
+    } else {
+      return NextResponse.json({
+        ...productData,
+        isExisting: true,
+        existingCategory: existingProduct.category,
+        message: `Product already exists in category: ${existingProduct.category}`,
+      });
+    }
   } catch (error: any) {
     console.error(
       "GET /api/products/[barcode] error:",

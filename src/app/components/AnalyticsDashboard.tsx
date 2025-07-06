@@ -91,17 +91,23 @@ export default function AnalyticsDashboard() {
         <h4 className="text-lg font-semibold text-gray-800 truncate pr-2">
           {product.name}
         </h4>
-        <span className="bg-green-100 text-green-800 text-sm font-medium px-2 py-1 rounded-full whitespace-nowrap">
+        {/* <span className="bg-green-100 text-green-800 text-sm font-medium px-2 py-1 rounded-full whitespace-nowrap">
           ${product.price.toFixed(2)}
-        </span>
+        </span> */}
       </div>
       <div className="space-y-2">
         <div className="flex items-center">
-          <span className="text-sm font-medium text-gray-500 w-20">Barcode:</span>
-          <span className="text-sm text-gray-700 font-mono">{product.barcode}</span>
+          <span className="text-sm font-medium text-gray-500 w-20">
+            Barcode:
+          </span>
+          <span className="text-sm text-gray-700 font-mono">
+            {product.barcode}
+          </span>
         </div>
         <div className="flex items-center">
-          <span className="text-sm font-medium text-gray-500 w-20">Category:</span>
+          <span className="text-sm font-medium text-gray-500 w-20">
+            Category:
+          </span>
           <span className="text-sm text-gray-700 bg-gray-100 px-2 py-1 rounded capitalize">
             {product.category}
           </span>
@@ -115,8 +121,12 @@ export default function AnalyticsDashboard() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Analytics Dashboard</h1>
-          <p className="mt-2 text-gray-600">Monitor your product inventory and categories</p>
+          <h1 className="text-3xl font-bold text-gray-900">
+            Analytics Dashboard
+          </h1>
+          <p className="mt-2 text-gray-600">
+            Monitor your product inventory and categories
+          </p>
         </div>
 
         {/* Error Alert */}
@@ -124,8 +134,16 @@ export default function AnalyticsDashboard() {
           <div className="mb-6 bg-red-50 border border-red-200 rounded-md p-4">
             <div className="flex">
               <div className="flex-shrink-0">
-                <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                <svg
+                  className="h-5 w-5 text-red-400"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </div>
               <div className="ml-3">
@@ -143,17 +161,39 @@ export default function AnalyticsDashboard() {
             <div className="bg-white rounded-lg shadow-sm p-6">
               <div className="flex items-center mb-6">
                 <div className="bg-blue-100 rounded-lg p-2 mr-3">
-                  <svg className="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  <svg
+                    className="h-6 w-6 text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                    />
                   </svg>
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900">Products per Category</h2>
+                <h2 className="text-2xl font-bold text-gray-900">
+                  Products per Category
+                </h2>
               </div>
-              
+
               {analytics.categoryCounts.length === 0 ? (
                 <div className="text-center py-8">
-                  <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                  <svg
+                    className="mx-auto h-12 w-12 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
+                    />
                   </svg>
                   <p className="mt-4 text-gray-500">No categories found</p>
                 </div>
@@ -171,18 +211,40 @@ export default function AnalyticsDashboard() {
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center">
                   <div className="bg-green-100 rounded-lg p-2 mr-3">
-                    <svg className="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    <svg
+                      className="h-6 w-6 text-green-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                      />
                     </svg>
                   </div>
-                  <h2 className="text-2xl font-bold text-gray-900">Recently Added Products</h2>
+                  <h2 className="text-2xl font-bold text-gray-900">
+                    Recently Added Products
+                  </h2>
                 </div>
-                
+
                 {/* Search Bar */}
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    <svg
+                      className="h-5 w-5 text-gray-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                      />
                     </svg>
                   </div>
                   <input
@@ -197,11 +259,23 @@ export default function AnalyticsDashboard() {
 
               {filteredProducts.length === 0 ? (
                 <div className="text-center py-8">
-                  <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                  <svg
+                    className="mx-auto h-12 w-12 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                    />
                   </svg>
                   <p className="mt-4 text-gray-500">
-                    {searchTerm ? "No products match your category search" : "No products found"}
+                    {searchTerm
+                      ? "No products match your category search"
+                      : "No products found"}
                   </p>
                 </div>
               ) : (
