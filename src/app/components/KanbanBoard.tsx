@@ -14,7 +14,8 @@ export default function KanbanBoard() {
     { name: "Uncategorized" },
   ]);
   const [newCategory, setNewCategory] = useState("");
-  const [reload, setReload] = useState(null);
+  // const [reload, setReload] = useState(null);
+  const [reload, setReload] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {

@@ -19,6 +19,7 @@ interface ApiResponse extends Product {
 interface BarcodeScannerProps {
   reload: (value: boolean) => void;
   isReload: boolean;
+  onScan: (product: Product) => void;
 }
 
 const BarcodeScanner: React.FC<BarcodeScannerProps> = ({
